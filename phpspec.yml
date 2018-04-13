@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: new_project_shafin
+        psr4_prefix: new_project_shafin
+        src_path: app
