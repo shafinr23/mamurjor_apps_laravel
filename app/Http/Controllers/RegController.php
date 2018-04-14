@@ -27,15 +27,26 @@ class RegController extends Controller {
 
 	public function postRegister(Request $request){
 
-		echo $photo = $request->file('image')->getClientOriginalName()."<br/>";
+		if ($request->hasFile('image')) {
+			echo  $photo = $request->file('image')->getClientOriginalName()."<br/>";
 
-		echo $photoex = $request->file('image')->getClientOriginalExtension()."<br/>";
+			echo $photoex = $request->file('image')->getClientOriginalExtension()."<br/>";
+	
+			echo $photoex = $request->file('image')->getRealPath()."<br/>";
+	
+			echo $photoex = $request->file('image')->getSize()."<br/>";
+	
+		 echo $photomine = $request->file('image')->getMimeType()."<br/>";
 
-		echo $photoex = $request->file('image')->getRealPath()."<br/>";
-
-		echo $photoex = $request->file('image')->getSize()."<br/>";
-
-		echo $photomine = $request->file('image')->getMimeType()."<br/>";
+			
+$photo = $request->file('image')->getClientOriginalName();
+$destination = base_path() . '/public/uploads';
+$request->file('image')->move($destination, $photo);
+			
+	
+		}else{
+			echo 'slect data';
+		}
 
 
 		// $email=$request->input('email');
