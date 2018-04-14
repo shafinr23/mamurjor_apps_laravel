@@ -39,9 +39,11 @@ class RegController extends Controller {
 		 echo $photomine = $request->file('image')->getMimeType()."<br/>";
 
 			
-$photo = $request->file('image')->getClientOriginalName();
-$destination = base_path() . '/public/uploads';
-$request->file('image')->move($destination, $photo);
+		$photo = $request->file('image')->getClientOriginalName();
+		$destination = base_path() . '/public/uploads';
+		$request->file('image')->move($destination, $photo);
+
+		
 			
 	
 		}else{
