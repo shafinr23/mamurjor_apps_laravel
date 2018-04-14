@@ -28,22 +28,34 @@ class RegController extends Controller {
 	public function postRegister(Request $request){
 
 		if ($request->hasFile('image')) {
-			echo  $photo = $request->file('image')->getClientOriginalName()."<br/>";
+		// 	echo  $photo = $request->file('image')->getClientOriginalName()."<br/>";
 
-			echo $photoex = $request->file('image')->getClientOriginalExtension()."<br/>";
+		// 	echo $photoex = $request->file('image')->getClientOriginalExtension()."<br/>";
 	
-			echo $photoex = $request->file('image')->getRealPath()."<br/>";
+		// 	echo $photoex = $request->file('image')->getRealPath()."<br/>";
 	
-			echo $photoex = $request->file('image')->getSize()."<br/>";
+		// 	echo $photoex = $request->file('image')->getSize()."<br/>";
 	
-		 echo $photomine = $request->file('image')->getMimeType()."<br/>";
+		//  echo $photomine = $request->file('image')->getMimeType()."<br/>";
 
 			
 		$photo = $request->file('image')->getClientOriginalName();
-		$destination = base_path() . '/public/uploads';
+		$destination = base_path() . '/public/uploads/users';
+		$destination_path = base_path() . '/public/uploads/users/'.$photo ;
 		$request->file('image')->move($destination, $photo);
 
-		
+
+
+		$email=$request->input('email');
+		//echo "your email is : ".$email.'<br/>';
+		$password=$request->input('pass');
+		//echo "your pass is : ".$password;
+
+		DB::insert('insert into reg(email,password,image_url)values(?,?,?)',[$email,$password,$destination_path]);
+		//echo "this is done ";
+		$request->session()->flash('mes','listed in our site');
+		return redirect()->action('RegController@index');
+
 			
 	
 		}else{
@@ -51,15 +63,7 @@ class RegController extends Controller {
 		}
 
 
-		// $email=$request->input('email');
-		// //echo "your email is : ".$email.'<br/>';
-		// $password=$request->input('pass');
-		// //echo "your pass is : ".$password;
-
-		// DB::insert('insert into reg(email,password)values(?,?)',[$email,$password]);
-		// //echo "this is done ";
-		// $request->session()->flash('mes','listed in our site');
-		// return redirect()->action('RegController@index');
+	
 
 		
 	}
