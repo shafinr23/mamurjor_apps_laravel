@@ -41,7 +41,8 @@ class RegController extends Controller {
 			
 		$photo = $request->file('image')->getClientOriginalName();
 		$destination = base_path() . '/public/uploads/users';
-		$destination_path = base_path() . '/public/uploads/users/'.$photo ;
+		$destination_path ='/uploads/users/'.$photo ;
+
 		$request->file('image')->move($destination, $photo);
 
 

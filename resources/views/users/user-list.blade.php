@@ -34,7 +34,7 @@
         <td><a href="{{url('/edit')}}/{{$user->id}}">edit</a></td>
         <td><a href="{{url('/del')}}/{{$user->id}}">delate</a></td>
         <td>{{$user->email}}</td>
-        <td>{{$user->password}}</td>
+        <td><img src="{{asset(".$user->image_url.")}}" ></td>
          
           
         </tr>
